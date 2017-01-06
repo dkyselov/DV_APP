@@ -1,10 +1,10 @@
+//let $ = require('jquery');
 let angular=require('angular');
-//var $ = require("jquery");
+require('./library/')();
 const ngModule=angular.module('app',[]);
 require('./directives')(ngModule);
-require('./agcontrollers/index')(ngModule);  
-//require('./library/index');
-console.log("Hello world!!!999"); 
+require('./agcontrollers/')(ngModule);  
+console.log("Hello world!!!99977"); 
 
 
 

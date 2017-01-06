@@ -15,7 +15,7 @@
 });
 
 $(document).ready(function () {
-    $(function () {
+    
         $("#win1").fadeOut(3000);
         $(window).scroll(function () {
             if ($(this).scrollTop() > 100) {
@@ -39,7 +39,6 @@ $(document).ready(function () {
             $("#social").fadeOut(1000);
         });
 
-    });
     
 });
 

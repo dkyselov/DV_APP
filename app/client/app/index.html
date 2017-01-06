@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>Первая сборка приложения</title>
+	<script type="text/javascript" src="build/bundle.js"></script>
+	<link rel="stylesheet" type="text/css" href="build/styles/style.css">
+	
+</head>
+<body>
+	<menu></menu>
+	<hr>
+	<div ng-controller="myCtrl">
+		First Name: <input type="text" ng-model="firstName"><br>
+		Last Name: <input type="text" ng-model="lastName"><br>
+		<br>
+		Full Name: {{firstName + " " + lastName}}
+	</div>
+	
+	
+</body>
+</html>

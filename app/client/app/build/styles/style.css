@@ -1,0 +1,23 @@
+menu {
+  float: right;
+  margin-right: 16px;
+  padding: 8px;
+  background-color: #dddddd;
+}
+
+#menu1 ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#menu1 li {
+  float: left;
+}
+
+#menu1 li a {
+  color: red;
+}
+
+
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3R5bGVzL3N0eWxlLmNzcyIsInNvdXJjZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OyIsInNvdXJjZVJvb3QiOiIifQ==*/

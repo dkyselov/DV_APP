@@ -7,8 +7,8 @@ module.exports = function(ngModule) {
       templateUrl: 'http://localhost/dv_app/app/client/app/directives/menu/menu.html',
       controllerAs: 'vm',
       controller: function() {
-        const vm=this;
-        vm.menu = ['Home','About As','Contacts','Orders'];
+        var vm=this;
+        vm.menu = ['About us','Contact','Payment'];
       }
     }
   }

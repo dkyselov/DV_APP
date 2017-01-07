@@ -1,5 +1,7 @@
 //let $ = require('jquery');
-let angular=require('angular');
+import $ from 'jquery';
+import  'bootstrap';
+import angular from 'angular';
 require('./library/')();
 const ngModule=angular.module('app',[]);
 require('./directives')(ngModule);

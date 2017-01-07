@@ -54,6 +54,17 @@ webpackConfig = {
         new ExtractTextPlugin('styles/style.css', {
             allChunks: true
         })
+
     ]
 };
 module.exports = webpackConfig;
+
+if (NODE_ENV == 'prod') {
+    module.exports.plugins.push(
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        })
+    )
+}

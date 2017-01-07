@@ -1,6 +1,6 @@
 module.exports = function(ngModule) {
-	ngModule.controller('myCtrl', function($scope) {
-    $scope.firstName = "Vasia";
-    $scope.lastName = "";
-});
+	ngModule.controller('myCtrl', ['$scope', '$http', function($scope, $http) {
+        $scope.firstName = "Vasia";
+        $scope.lastName = "";
+    }]);
 }

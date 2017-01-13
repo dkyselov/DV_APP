@@ -13,11 +13,13 @@ abstract class Controller_Base extends Controller_Template {
 
         // config data
         $site_name = $config->site_name;
+        $site_description = $config->site_description;
+        $copyright = $config->copyright;
 
         // Include styles and scripts 
         $this->template->styles = array();
         $this->template->scripts = array();
-        
+
         // Include blocks
         $this->template->block_left = null;
         $this->template->block_center = null;

@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /*
- * Base Class
+ * Base Class API 
  */
  class Controller_Base extends Controller{
     //Config variable
@@ -8,7 +8,7 @@
     protected $site_name, $site_description,$copyright;
     //initial to brauser
     public function  before() {
-         parent::before();
+        parent::before();
 
         if(Request::current()->is_initial())
         {
@@ -16,8 +16,7 @@
 			
         }
     }
-    public function action_index() {
-        
+    public function action_config() {
         //open app_server_config file
         $config = Kohana::config('app_server_config');
         // config data
@@ -27,7 +26,6 @@
         // Include styles and scripts 
        /* $this->template->styles = array();
         $this->template->scripts = array();
-
         // Include blocks
         $this->template->block_left = null;
         $this->template->block_center = null;

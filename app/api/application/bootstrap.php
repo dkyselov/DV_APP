@@ -119,6 +119,12 @@ Route::set('config', 'config')
 		'controller' => 'config',
 		'action'=>'config',
 	));
+Route::set('users', 'users')
+	->defaults(array(
+        'directory'  => 'index',
+		'controller' => 'users',
+		'action'=>'index',
+	));
 Route::set('default', '(<controller>(/<action>(/<id>)))')
 	->defaults(array(
 		'controller' => 'index',

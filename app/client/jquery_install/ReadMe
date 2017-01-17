@@ -1,0 +1,4 @@
+jquery через npm install ставится, но почему то файл не работает! Я беру с этого каталога файл jquery и копирую его в node_modules/jquery/dist - вместо установленного jquery
+
+Это файл jquery 1.9.1
+

@@ -1,13 +1,38 @@
 {
-  "name": "kyselov",
+  "name": "dmytro",
   "version": "1.0.0",
-  "description": "hahaha",
-  "main": "webpack.config.js",
+  "description": "first",
+  "main": "app/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node node_modules/.bin/webpack-dev-server --content-base app",
+     "build": "NODE_ENV=production webpack --progress",
+    "watch": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dkyselov/DV.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dkyselov/DV/issues"
+  },
+  
+  "homepage": "https://github.com/dkyselov/DV#readme",
   "dependencies": {
     "webpack-uglify-js-plugin": "^1.1.9"
   },
   "devDependencies": {
-    "angular": "^1.6.1",
+     "angular": "^1.6.1",
+    "angular-animate": "^1.6.1",
+    "angular-cookies": "^1.6.1",
+    "angular-route": "^1.6.1",
+    "bootstrap": "^3.3.6",
+    "jquery": "^3.1.1",
+    "imports-loader": "^0.6.5",
+    "exports-loader": "^0.6.3",
+    "jquery-ui-bundle": "^1.11.4",
     "babel-core": "^6.21.0",
     "babel-loader": "^6.2.10",
     "babel-preset-env": "^1.1.4",
@@ -15,33 +40,15 @@
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
     "babel-preset-stage-1": "^6.16.0",
-    "bootstrap": "^3.3.7",
     "bootstrap-sass": "^3.3.7",
     "bootstrap-webpack": "^0.0.5",
     "css-loader": "^0.26.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "node-sass": "^4.1.1",
-    "react": "^15.4.1",
-    "react-dom": "^15.4.1",
     "resolve-url-loader": "^1.6.1",
     "sass-loader": "^4.1.1",
     "style-loader": "^0.13.1",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node node_modules/.bin/webpack-dev-server --content-base app",
-    "build": "NODE_ENV=production node node_modules/.bin/webpack && cp app/index.html dist/index.html"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dkyselov/DV.git"
-  },
-  "author": "kyselov dmytro",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/dkyselov/DV/issues"
-  },
-  "homepage": "https://github.com/dkyselov/DV#readme"
+  }
 }

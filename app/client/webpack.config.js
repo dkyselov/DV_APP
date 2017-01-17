@@ -1,59 +1,56 @@
-const NODE_ENV = process.env.NODE_ENV || 'development';
-webpack = require('webpack');
-path = require('path');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-webpackConfig = {
-    context: __dirname + '/app', //Директория файлов 
-    entry: {
-        bundle: './index.js',
-        styles: './style.scss'
-    },
+'use strict';
+const NODE_ENV = process.env.NODE_ENV || 'development'; //Проверяем окружение, разработка или production
+const webpack=require('webpack');
+//Поодключаем наш модуль export
+module.exports={
+    entry: "./app/index.js", //Основной файл, где подключены все файлы. С него происходит сборка
     output: {
-        filename: '[name].js',
-        path: './app/build',
-        library: '[name]'
+        filename: "./app/build/build.js", 
+        library: '[name]'//Итоговый собранный файл
     },
-    resolve: {
-        extensions: ['', '.js', '.jsx']
-    },
-    devtool:NODE_ENV=='development' ? "cheap-inline-module-source-map":null,
     watch:NODE_ENV=='development', //следит за изменениями файлах и пересобирает пакет
-	watchOptions:{
-		aggregateTimeout:100 //ускоряет пересборку нашего проэкта
-	},
-	 resolveLoader:{
-    	modulesDirectories: [ 'node_modules'] ,
-    	moduleTemplates:['*-loader','*'],
-    	extensions:['','.js']
+    watchOptions:{
+        aggregateTimeout:100 //ускоряет пересборку нашего проэкта
     },
-    module: {
-        loaders: [
-            {
-                test: /\.jsx?$/,
-                exclude: [/node_modules/],
-                loader: "babel-loader",
-                query: {
-                    presets: ['es2015']
-                }
-            },
-            {
-                test: /\.scss$/,
-                loader: ExtractTextPlugin.extract('style-loader', 'css-loader!resolve-url!sass-loader?sourceMap')
-            },
-            {
-                test: /\.css$/,
-                loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
-            },
-            {
-                test: /\.woff2?$|\.ttf$|\.eot$|\.svg$|\.png|\.jpe?g|\.gif$/,
-                loader: 'file-loader'
-            }
-        ]
+     devtool:NODE_ENV=='development' ? "cheap-inline-module-source-map":null, //Это для production при разработке для удобной отладки
+    //Подключаем плагины для WebPack
+         plugins:[
+                new webpack.DefinePlugin({
+                    NODE_ENV: JSON.stringify(NODE_ENV),
+                    LANG:JSON.stringify('ru')
+            })
+     ],
+     resolve: {
+        extensions: ['', '.js', '.jsx', '.css', 'scss'],
+        modulesDirectories: [
+          'node_modules'
+        ]        
     },
-    plugins: [
-        new ExtractTextPlugin('styles/style.css', {
-            allChunks: true
-        })
-    ]
+    resolveLoader:{
+        modulesDirectories: [ 'node_modules'] ,
+        moduleTemplates:['*-loader','*'],
+        extensions:['','.js']
+    },
+     module:{
+        loaders:[
+            {
+            test:/\.js/,
+            exclude: /(node_modules|bower_components)/,
+            loader:'babel',
+            query: {
+      presets: ['es2015'],
+    }
+        }]
+     },
+
 };
-module.exports = webpackConfig;
+
+if (NODE_ENV == 'prod') {
+    module.exports.plugins.push(
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        })
+    )
+}

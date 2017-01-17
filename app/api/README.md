@@ -1,3 +1,2 @@
-# Kohana PHP Framework, version 3.1 (release)
-
-This is the current release version of [Kohana](http://kohanaframework.org/).
+# D$V WEB STUDIO API (release)
+This is the current release version of [v0.0.1] (http://d-v.com/)

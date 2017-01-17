@@ -80,7 +80,7 @@ if (isset($_SERVER['KOHANA_ENV']))
  * - boolean  caching     enable or disable internal caching                 FALSE
  */
 Kohana::init(array(
-	'base_url'   => '/dv_app/app/api',
+	'base_url'   => '/app/api',
 	'index_file'=>false,
 ));
 
@@ -101,9 +101,9 @@ Kohana::modules(array(
 	// 'auth'       => MODPATH.'auth',       // Basic authentication
 	// 'cache'      => MODPATH.'cache',      // Caching with multiple backends
 	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
-	// 'database'   => MODPATH.'database',   // Database access
+	'database'   => MODPATH.'database',   // Database access
 	// 'image'      => MODPATH.'image',      // Image manipulation
-	// 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
+	 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
 	// 'unittest'   => MODPATH.'unittest',   // Unit testing
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
 	));
@@ -112,8 +112,23 @@ Kohana::modules(array(
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
+if ( ! Route::cache()) {
+Route::set('config', 'config')
+	->defaults(array(
+        'directory'  => 'index',
+		'controller' => 'config',
+		'action'=>'config',
+	));
+Route::set('user', 'user')
+	->defaults(array(
+        'directory'  => 'index',
+		'controller' => 'user',
+		'action'=>'index',
+	));
 Route::set('default', '(<controller>(/<action>(/<id>)))')
 	->defaults(array(
-		'controller' => 'welcome',
+		'controller' => 'index',
 		'action'     => 'index',
 	));
+Route::cache(TRUE);
+}

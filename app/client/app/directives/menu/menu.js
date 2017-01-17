@@ -4,11 +4,12 @@ module.exports = function(ngModule) {
     return {
       restrict: 'E',
       scope: {},
-      templateUrl: 'http://localhost/dv_app/app/client/app/directives/menu/menu.html',
+      templateUrl: 'http://localhost/dv_app/appclient/app/directives/menu/menu.html',
       controllerAs: 'vm',
       controller: function() {
-        const vm=this;
-        vm.menu = ['Home','About As','Contacts','Orders'];
+        let vm=this;
+       vm.menu = ['About us','Contact','Payment'];
+       console.log(vm.menu);
       }
     }
   }

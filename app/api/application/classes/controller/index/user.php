@@ -12,10 +12,15 @@ class Controller_Index_User extends Controller_Index {
     	echo "<br>";
     	print_r($users[0]["name"]);*/
     	//ORM methods
-    	$p=ORM::factory('user');
-			$p->id=3;
-			$p->name='Vasia';
-			$p->login='vasia93';
-			$p->save();
+		$users=ORM::factory('user')->find_all();
+			$users_all=array();
+      		for ($i=0;$i<count($users);$i++){
+				$id=$users[$i]->id;   
+				$login=$users[$i]->login; 
+				$name=$users[$i]->name; 
+				$arr=array($id,$login,$name);
+				array_push($users_all, $arr);
+    		}	
+			echo json_encode($users_all);	
    }
 }

@@ -1,26 +1,37 @@
-<?php defined('SYSPATH') or die('No direct script access.');
+﻿<?php defined('SYSPATH') or die('No direct script access.');
 /*
  * Base Class Client API
  */
 class Controller_Index_User extends Controller_Index {
    public function action_index(){ 
-			//database methods   	
-     /*  $users=Model::factory('users')->all_users();
-       for ($i=0;$i<count($users);$i++){
-      		print_r(json_encode($users[$i]["login"]));
-    	}
-    	echo "<br>";
-    	print_r($users[0]["name"]);*/
-    	//ORM methods
-		$users=ORM::factory('user')->find_all();
-			$users_all=array();
-      		for ($i=0;$i<count($users);$i++){
-				$id=$users[$i]->id;   
-				$login=$users[$i]->login; 
-				$name=$users[$i]->name; 
-				$arr=array($id,$login,$name);
-				array_push($users_all, $arr);
-    		}	
-			echo json_encode($users_all);	
+	$json = file_get_contents('php://input');
+	$data = json_decode($json,true);
+	$post=Validation::factory($data);
+		$post->rule('login','not_empty')
+		->rule('password','not_empty')
+		->rule('login', 'max_length', array(':value', 10))
+		->rule('password', 'max_length', array(':value', 10))
+		->rule('login', 'alpha_numeric')
+		->rule('password', 'alpha_numeric')
+		->rule('login', 'min_length', array(':value', 3))
+		->rule('password', 'min_length', array(':value', 3));
+
+		if($post->check()){
+			$status=true;
+			$data=array("Данные введены коректно");
+			$messege=array($status,$data);
+			echo json_encode($messege);
+		}
+		else{
+			$errors=$post->errors('validation1');
+			$status=false;
+			$data=$errors;
+			$messege=array($status,$data);
+			print_r(json_encode($messege));
+		}
+
+   }
+   public function action_user(){
+	 echo "work";
    }
 }

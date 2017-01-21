@@ -20,7 +20,7 @@ class Controller_Index_User extends Controller_Index {
 			$status=true;
 			$data=array("Данные введены коректно");
 			$messege=array($status,$data);
-			echo json_encode($messege);
+			print_r(json_encode($messege));
 		}
 		else{
 			$errors=$post->errors('validation1');

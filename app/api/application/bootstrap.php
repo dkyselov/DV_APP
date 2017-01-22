@@ -53,8 +53,8 @@ ini_set('unserialize_callback_func', 'spl_autoload_call');
 /**
  * Set the default language
  */
-I18n::lang('en-us','ru');
-
+I18n::lang('ru');
+ Cookie::$salt = 'asd12d21561651651651';
 /**
  * Set Kohana::$environment if a 'KOHANA_ENV' environment variable has been supplied.
  *
@@ -98,8 +98,8 @@ Kohana::$config->attach(new Config_File);
  * Enable modules. Modules are referenced by a relative or absolute path.
  */
 Kohana::modules(array(
-	// 'auth'       => MODPATH.'auth',       // Basic authentication
-	// 'cache'      => MODPATH.'cache',      // Caching with multiple backends
+	'auth'       => MODPATH.'auth',       // Basic authentication
+	'cache'      => MODPATH.'cache',      // Caching with multiple backends
 	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
 	'database'   => MODPATH.'database',   // Database access
 	// 'image'      => MODPATH.'image',      // Image manipulation
@@ -119,11 +119,17 @@ Route::set('config', 'config')
 		'controller' => 'config',
 		'action'=>'config',
 	));
+Route::set('auth', '<action>', array('action' => 'login|logout|register'))
+	->defaults(array(
+        'directory'  => 'index',
+		'controller' => 'auth',
+		'action'=>'index',	
+));
 Route::set('user', 'user')
 	->defaults(array(
         'directory'  => 'index',
 		'controller' => 'user',
-		'action'=>'index',
+		
 	));
 Route::set('default', '(<controller>(/<action>(/<id>)))')
 	->defaults(array(

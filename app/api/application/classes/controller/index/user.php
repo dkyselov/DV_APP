@@ -1,37 +1,43 @@
-﻿<?php defined('SYSPATH') or die('No direct script access.');
-/*
- * Base Class Client API
- */
-class Controller_Index_User extends Controller_Index {
-   public function action_index(){ 
-	$json = file_get_contents('php://input');
-	$data = json_decode($json,true);
-	$post=Validation::factory($data);
-		$post->rule('login','not_empty')
-		->rule('password','not_empty')
-		->rule('login', 'max_length', array(':value', 10))
-		->rule('password', 'max_length', array(':value', 10))
-		->rule('login', 'alpha_numeric')
-		->rule('password', 'alpha_numeric')
-		->rule('login', 'min_length', array(':value', 3))
-		->rule('password', 'min_length', array(':value', 3));
+<?php defined('SYSPATH') or die('No direct script access.');
 
-		if($post->check()){
-			$status=true;
-			$data=array("Данные введены коректно");
-			$messege=array($status,$data);
-			print_r(json_encode($messege));
-		}
-		else{
-			$errors=$post->errors('validation1');
-			$status=false;
-			$data=$errors;
-			$messege=array($status,$data);
-			print_r(json_encode($messege));
-		}
+class Model_User extends Model_Auth_User {
 
-   }
-   public function action_user(){
-	 echo "work";
-   }
-}
+  public function labels()
+    {
+        return array(
+            'username' => 'Логин',
+            'email' => 'E-mail',
+            'first_name' => 'ФИО',
+            'password' => 'Пароль',
+            'password_confirm' => 'Повторить пароль',
+        );
+    }
+
+    public function rules()
+	{
+		return array(
+			'username' => array(
+				array('not_empty'),
+				array('min_length', array(':value', 4)),
+				array('max_length', array(':value', 32)),
+				array('regex', array(':value', '/^[-\pL\pN_.]++$/uD')),
+				array(array($this, 'username_available'), array(':validation', ':field')),
+			),
+                        'first_name' => array(
+				array('not_empty'),
+				array('min_length', array(':value', 2)),
+				array('max_length', array(':value', 32)),
+			),
+			'password' => array(
+				array('not_empty'),
+			),
+			'email' => array(
+				array('not_empty'),
+				array('min_length', array(':value', 4)),
+				array('max_length', array(':value', 127)),
+				array('email'),
+				array(array($this, 'email_available'), array(':validation', ':field')),
+			),
+		);
+	}
+} 

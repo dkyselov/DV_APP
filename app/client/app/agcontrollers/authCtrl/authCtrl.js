@@ -38,9 +38,10 @@ module.exports = function(ngModule) {
 				$scope.info = data['info'];
 				//alert($scope.info);
 				if($scope.info=='errors'){
-					console.log("NOlogin");
+					//console.log("NOlogin");
 					$scope.form_controll=true;
 					$scope.user=false;
+					//$("#user_info").fadeOut(1000);
 				}
 				else{
 					alert("Bad connections");
@@ -67,8 +68,8 @@ module.exports = function(ngModule) {
 				$scope.username=data['username'];
 				$scope.show_errors=false;
 				$scope.form_controll=false;	
-				//$scope.user=true;
-				$("#user_info").fadeIn(1000);
+				$scope.user=true;
+				//$("#user_info").fadeIn(1000);
 			}
 			else{
 				$scope.err=data['errors'][0];

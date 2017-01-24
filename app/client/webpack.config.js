@@ -44,7 +44,6 @@ module.exports={
      },
 
 };
-
 if (NODE_ENV == 'prod') {
     module.exports.plugins.push(
         new webpack.optimize.UglifyJsPlugin({

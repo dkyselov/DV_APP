@@ -1,7 +1,30 @@
-<?php defined('SYSPATH') or die('No direct script access.');
+﻿<?php defined('SYSPATH') or die('No direct script access.');
 
 return array(
+	'alpha'         => ':field must contain only letters',
+	'alpha_dash'    => ':field must contain only numbers, letters and dashes',
+	'alpha_numeric' => 'Введите правильно значения в поле :field. Должны быть только буквы и цифры',
+	'color'         => ':field must be a color',
+	'credit_card'   => ':field must be a credit card number',
+	'date'          => 'Введите правильно дату',
+	'decimal'       => ':field must be a decimal with :param2 places',
+	'digit'         => ':field must be a digit',
+	'email'         => 'Введите правильно email',
+	'email_domain'  => 'email не соответствует не одному домену',
+	'equals'        => ':field must equal :param2',
+	'exact_length'  => ':field must be exactly :param2 characters long',
+	'in_array'      => ':field must be one of the available options',
+	'ip'            => ':field must be an ip address',
+	'matches'       => ':field must be the same as :param2',
+	'min_length'    => 'Минимальная длина :field 3 символа',
+	'max_length'    => 'Максимальная длина :field 8 символов',
+	'not_empty'     => 'Поле :field не должно быть пустым',
+	'numeric'       => ':field must be numeric',
+	'phone'         => ':field must be a phone number',
+	'range'         => ':field must be within the range of :param2 to :param3',
+	'regex'         => 'Введенные данные :field не коректны',
+	'url'           => ':field must be a url',
         'username_available'         => 'Поле ":field" уже существует',
         'email_available'         => 'Поле ":field" уже существует',
-        'no_user' => 'Неверный логин или пароль',
+        'no_user' => 'Wrong login or password',
 );

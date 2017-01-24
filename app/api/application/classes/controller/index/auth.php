@@ -1,34 +1,33 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /*
- * Авторизация
+ * Auth
  */
 class Controller_Index_Auth extends Controller_Index {
-
     public function action_login() {
-         $json = file_get_contents('php://input');
-         $data=json_decode($json,true);
-         //print_r($data); 
-        // $data=array('username'=>'dimka','password'=>'12345678','remember'=>true);
+         $info="errors";
          $auth=Auth::instance();
-        if($auth->logged_in()) {
+         if($auth->logged_in()) {
            $user=$auth->get_user()->username;
-           print_r(json_encode(array("username"=>$user,))); 
-           echo "Уже залогинен";
-        }
+           $info="login";
+           print_r(json_encode(array("info"=>$info,"username"=>$user,))); 
+           //echo "Уже залогинен";
+         }
         else { 
-           // $data = json_decode($json, TRUE);
-            $status = Auth::instance()->login($data['username'], $data['password'], (bool) $data['remember']);
-            if ($status){
+           $json = file_get_contents('php://input'); 
+           $data=json_decode($json,true);
+           $status = Auth::instance()->login($data['username'], $data['password'], (bool) $data['remember']);
+           if ($status){
                 $auth=Auth::instance();
                 $user=$auth->get_user()->username;
-                print_r(json_encode(array("username"=>$user,))); 
-                echo "Только залогинился";
-               // print_r(json_encode($user));
-               // print_r(json_encode(array('status' => $status,'login'=>$login))); 
+                $info="login";
+                print_r(json_encode(array("info"=>$info,"username"=>$user,))); 
+               // echo "Только залогинился"; 
             }
             else {
                 $errors = array(Kohana::message('auth/user', 'no_user'));
-                print_r(json_encode($errors));
+               // $info="errors";
+                print_r(json_encode(array("info"=>$info,"errors"=>$errors)));
+               // echo "Где то ошибки";
             }
         }
     
@@ -84,8 +83,9 @@ class Controller_Index_Auth extends Controller_Index {
     }
     
     public function action_logout() {
-        echo "logout";
+       // echo "logout";
         if(Auth::instance()->logout()) {
+            $this->action_login();
            // $this->request->redirect();
         }
     }

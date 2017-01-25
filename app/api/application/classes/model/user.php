@@ -2,22 +2,6 @@
 
 class Model_User extends Model_Auth_User {
 
-   public static function get_password_validation($values)
-    {
-        return Validation::factory($values)
-            ->rule('password', 'min_length', array(':value', 5))
-			->rule('password', 'max_length', array(':value', 15));
-		
-    }
-
-    public function create_user($values, $expected)
-    {
-        // Validation for passwords
-        $extra_validation = Model_User::get_password_validation($values)
-            ->rule('password', 'not_empty');
-
-        return $this->values($values, $expected)->create($extra_validation);
-    }
   public function labels()
     {
         return array(
@@ -32,53 +16,69 @@ class Model_User extends Model_Auth_User {
     public function rules()
 	{
 		return array(
-			'username' => array(
-				array('not_empty'),
-				array('min_length', array(':value', 5)),
-				array('max_length', array(':value', 32)),
-				array('regex', array(':value', '/^[a-z]+([-_]?[a-z0-9]+){0,2}$/i')),
-			),
-			'password' => array(
-				array('not_empty'),
-				array('min_length', array(':value', 8)),
-				//array('max_length', array(':value', 12)),
-			),
 			'email' => array(
 				array('not_empty'),
 				array('min_length', array(':value', 6)),
-				array('max_length', array(':value', 65)),
+				array('max_length', array(':value', 25)),
 				array('email'),
+				//array('email_domain'),
 			),
-			 'first_name' => array(
+			'username' => array(
+				array('not_empty'),
+				array('min_length', array(':value', 5)),
+				array('max_length', array(':value', 25)),
+				//array('regex', array(':value', '/^[a-z]+([-_]?[a-z0-9]+){0,2}$/i')),
+			),
+			'password' => array(
+				array('not_empty'),
+				array('min_length', array(':value', 3)),
+				array('max_length', array(':value', 15)),
+			    array('alpha_numeric', array(':value', TRUE)),
+			),
+			'password_confirm' => array(
+				array('not_empty'),
+				array('min_length', array(':value', 3)),
+				array('max_length', array(':value', 15)),
+				array('alpha_numeric', array(':value', TRUE)),
+			),
+            'first_name' => array(
 				array('not_empty'),
 				array('min_length', array(':value', 3)),
 				array('max_length', array(':value', 32)),
+				//array('regex', array(':value', '^[a-zA-Zа-яёА-ЯЁ]+$')),
 			),
-			 'last_name' => array(
+			'last_name' => array(
 				array('not_empty'),
 				array('min_length', array(':value', 3)),
 				array('max_length', array(':value', 32)),
+				//array('regex', array(':value', '^[a-zA-Zа-яёА-ЯЁ]+$')),
 			),
 			 'country' => array(
 				array('not_empty'),
 				array('min_length', array(':value', 3)),
 				array('max_length', array(':value', 32)),
+				//array('regex', array(':value', '^[a-zA-Zа-яёА-ЯЁ\s\-]+$')),
 			),
-			'city' => array(
+			 'city' => array(
 				array('not_empty'),
 				array('min_length', array(':value', 3)),
 				array('max_length', array(':value', 32)),
+				//array('regex', array(':value', '^[a-zA-Zа-яёА-ЯЁ\s\-]+$')),
 			),
-			'company' => array(
+			 'company' => array(
 				array('not_empty'),
 				array('min_length', array(':value', 3)),
 				array('max_length', array(':value', 32)),
+				//array('regex', array(':value', '^[a-zA-Zа-яёА-ЯЁ\s\-]+$')),
 			),
-			'phone_number' => array(
+			 'phone_number' => array(
 				array('not_empty'),
-				array('min_length', array(':value', 3)),
-				array('max_length', array(':value', 32)),
+				array('min_length', array(':value', 10)),
+				array('max_length', array(':value', 15)),
+				//array('regex', array(':value', '^[0-9()\-+ ]+$')),
 			),
+			
+			
 		);
 	}
 } 

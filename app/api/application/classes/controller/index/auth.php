@@ -68,17 +68,21 @@ class Controller_Index_Auth extends Controller_Index {
 
                 $role = ORM::factory('role')->where('name', '=', 'login')->find();
                 $users->add('roles', $role);
-                echo "Вы зарегестрированы";
+                $info="Complete";
+                print_r(json_encode(array("info"=>$info,"message"=>"welcome" )));
                 //$this->action_login();
                 //$this->request->redirect('account');
             }
             catch (ORM_Validation_Exception $e) {
                 $errors = $e->errors('auth');
-                print_r($errors);   
+                $info="error";
+                print_r(json_encode(array("info"=>$info,"message"=>$errors)));
+               // print_r($errors);   
             }
         }
         else{ 
-            echo "Not data";
+            $info="not_data";
+             print_r(json_encode(array("info"=>$info,"message"=>"Enter all data")));
         }
     }
     

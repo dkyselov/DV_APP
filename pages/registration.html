@@ -48,6 +48,14 @@
 		<span style="color:red;">{{password}}</span>
       </div>
     </div>
+    <!-- confirm password -->
+    <div class="form-group">
+     <label class="control-label col-sm-2" for="password_confirm">Confirm password:</label>
+      <div class="col-sm-10">          
+		<input type="password_confirm" class="form-control" id="password_confirm" placeholder="Enter password confirm" ng-model="password_confirm"><br>
+		<span style="color:red;">{{password_confirm}}</span>
+      </div>
+    </div>
     <!--first_name -->
     <div class="form-group">
      <label class="control-label col-sm-2" for="password">First name:</label>
@@ -98,7 +106,7 @@
     </div>
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-default btn-primary" ng-click="send_data()">Registration</button>&nbsp;
+        <button type="submit" class="btn btn-default btn-primary" ng-click="reg()">Registration</button>&nbsp;
         <a href="index_test.html">Login</a>
       </div>
     </div>

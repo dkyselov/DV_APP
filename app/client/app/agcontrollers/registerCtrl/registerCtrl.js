@@ -3,11 +3,12 @@ module.exports = function(ngModule) {
         $scope.show_errors=false;
 		$scope.form_controll=true;
 		$scope.ok=false;
-        $scope.send_data = function () {
+        $scope.reg = function () {
         let request = {
             "email":$scope.email1,
             "username":$scope.username,
             "password":$scope.password,
+			"password_confirm":$scope.password_confirm,
             "first_name":$scope.first_name,
             "last_name":$scope.last_name,
             "country":$scope.country,

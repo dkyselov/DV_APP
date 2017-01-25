@@ -33,11 +33,11 @@ class Controller_Index_Auth extends Controller_Index {
     
     }
     public function action_register() {
-       /* $json = file_get_contents('php://input');
-        $data=json_decode($json,true); */
-        $data=array(
-            "email"=>"dkiselov.ua@gmail.com",
-            "username"=>"dimka",
+        $json = file_get_contents('php://input');
+        $data=json_decode($json,true); 
+        /*$data=array(
+            "email"=>"dkiselov12365.ua@gmail.com",
+            "username"=>"dimka1",
             "password"=>"12345678",
             "password_confirm"=>"12345678",
             "first_name"=>"DMYTRO",
@@ -46,9 +46,9 @@ class Controller_Index_Auth extends Controller_Index {
             "city" => "DNIPRO",
             "company"=>"DV",
             "phone_number"=>"+380501305970",
-        );
+        );*/
         
-        if (isset($data) && count($data)>0 ){
+        if (isset($data) && count($data)>8 ){
            //print_r($data);
             //$data = Arr::extract($_POST, array('username', 'password', 'first_name', 'password_confirm', 'email'));
             $users = ORM::factory('user');
@@ -68,17 +68,20 @@ class Controller_Index_Auth extends Controller_Index {
 
                 $role = ORM::factory('role')->where('name', '=', 'login')->find();
                 $users->add('roles', $role);
-                echo "Вы зарегестрированы";
+                $info="Complete";
+                print_r(json_encode(array("info"=>$info,"message"=>"welcome" )));
                 //$this->action_login();
                 //$this->request->redirect('account');
             }
             catch (ORM_Validation_Exception $e) {
                 $errors = $e->errors('auth');
-                print_r($errors);   
+                $info="error";
+                print_r(json_encode(array("info"=>$info,"message"=>$errors))); 
             }
         }
         else{ 
-            echo "Not data";
+             $info="not_data";
+             print_r(json_encode(array("info"=>$info,"message"=>"Enter all data")));
         }
     }
     

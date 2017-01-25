@@ -33,9 +33,9 @@ class Controller_Index_Auth extends Controller_Index {
     
     }
     public function action_register() {
-       /* $json = file_get_contents('php://input');
-        $data=json_decode($json,true); */
-        $data=array(
+        $json = file_get_contents('php://input');
+        $data=json_decode($json,true); 
+       /* $data=array(
             "email"=>"dkiselo11v11.ua@gmail.com",
             "username"=>"dimka111",
             "password"=>"123456789101112",
@@ -46,13 +46,12 @@ class Controller_Index_Auth extends Controller_Index {
             "city" => "DNIPRO",
             "company"=>"DVd",
             "phone_number"=>"+380501305970",
-        );
+        );*/
         
         if (isset($data) && count($data)>0 ){
            //print_r($data);
             //$data = Arr::extract($_POST, array('username', 'password', 'first_name', 'password_confirm', 'email'));
             $users = ORM::factory('user');
-
             try {
                 $users->create_user($data, array(
                     'email',
@@ -65,7 +64,6 @@ class Controller_Index_Auth extends Controller_Index {
                     'company',
                     'phone_number',
                 ));
-
                 $role = ORM::factory('role')->where('name', '=', 'login')->find();
                 $users->add('roles', $role);
                 $info="Complete";
@@ -93,5 +91,4 @@ class Controller_Index_Auth extends Controller_Index {
            // $this->request->redirect();
         }
     }
-
 }

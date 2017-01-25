@@ -33,22 +33,22 @@ class Controller_Index_Auth extends Controller_Index {
     
     }
     public function action_register() {
-        $json = file_get_contents('php://input');
-        $data=json_decode($json,true); 
-        /*$data=array(
-            "email"=>"dkiselov12365.ua@gmail.com",
-            "username"=>"dimka1",
-            "password"=>"12345678",
-            "password_confirm"=>"12345678",
+       /* $json = file_get_contents('php://input');
+        $data=json_decode($json,true); */
+        $data=array(
+            "email"=>"dkiselo11v11.ua@gmail.com",
+            "username"=>"dimka111",
+            "password"=>"123456789101112",
+            "password_confirm"=>"123456789101112",
             "first_name"=>"DMYTRO",
             "last_name"=>"KYSELOV",
             "country" =>"UKRAINE",
             "city" => "DNIPRO",
-            "company"=>"DV",
+            "company"=>"DVd",
             "phone_number"=>"+380501305970",
-        );*/
+        );
         
-        if (isset($data) && count($data)>8 ){
+        if (isset($data) && count($data)>0 ){
            //print_r($data);
             //$data = Arr::extract($_POST, array('username', 'password', 'first_name', 'password_confirm', 'email'));
             $users = ORM::factory('user');
@@ -68,20 +68,17 @@ class Controller_Index_Auth extends Controller_Index {
 
                 $role = ORM::factory('role')->where('name', '=', 'login')->find();
                 $users->add('roles', $role);
-                $info="Complete";
-                print_r(json_encode(array("info"=>$info,"message"=>"welcome" )));
+                echo "Вы зарегестрированы";
                 //$this->action_login();
                 //$this->request->redirect('account');
             }
             catch (ORM_Validation_Exception $e) {
                 $errors = $e->errors('auth');
-                $info="error";
-                print_r(json_encode(array("info"=>$info,"message"=>$errors))); 
+                print_r($errors);   
             }
         }
         else{ 
-             $info="not_data";
-             print_r(json_encode(array("info"=>$info,"message"=>"Enter all data")));
+            echo "Not data";
         }
     }
     

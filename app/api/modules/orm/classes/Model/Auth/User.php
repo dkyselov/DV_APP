@@ -37,6 +37,9 @@ class Model_Auth_User extends ORM {
 			),
 			'password' => array(
 				array('not_empty'),
+				array('min_length', array(':value', 8)),
+				array('max_length', array(':value', 12)),
+				array('alpha_numeric'),
 			),
 			'email' => array(
 				array('not_empty'),

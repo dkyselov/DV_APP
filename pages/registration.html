@@ -19,7 +19,7 @@
   <!-- Ok-->
   <div class="alert alert-success alert-dismissable" ng-show="ok">
   <strong>Ok!</strong> <br>
-  <p >- {{data}}</p>
+  <p ng-repeat=" data in data.message._external">- {{data}}</p>
 </div>
   <form class="form-horizontal" ng-show="form_controll">
    <!--email -->

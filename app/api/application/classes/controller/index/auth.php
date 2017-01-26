@@ -33,20 +33,20 @@ class Controller_Index_Auth extends Controller_Index {
     
     }
     public function action_register() {
-        $json = file_get_contents('php://input');
-        $data=json_decode($json,true); 
-       /* $data=array(
-            "email"=>"dkiselo11v11.ua@gmail.com",
-            "username"=>"dimka111",
-            "password"=>"123456789101112",
-            "password_confirm"=>"123456789101112",
+        /*$json = file_get_contents('php://input');
+        $data=json_decode($json,true);*/ 
+        $data=array(
+            "email"=>"dkiselo11v113.ua@gmail.com//",
+            "username"=>"dimka11115",
+            "password"=>"12345",
+            "password_confirm"=>"12345",
             "first_name"=>"DMYTRO",
             "last_name"=>"KYSELOV",
             "country" =>"UKRAINE",
             "city" => "DNIPRO",
             "company"=>"DVd",
             "phone_number"=>"+380501305970",
-        );*/
+        );
         
         if (isset($data) && count($data)>0 ){
            //print_r($data);

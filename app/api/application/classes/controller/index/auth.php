@@ -10,7 +10,6 @@ class Controller_Index_Auth extends Controller_Index {
            $user=$auth->get_user()->username;
            $info="login";
            print_r(json_encode(array("info"=>$info,"username"=>$user,))); 
-           //echo "Уже залогинен";
          }
         else { 
            $json = file_get_contents('php://input'); 
@@ -20,37 +19,34 @@ class Controller_Index_Auth extends Controller_Index {
                 $auth=Auth::instance();
                 $user=$auth->get_user()->username;
                 $info="login";
-                print_r(json_encode(array("info"=>$info,"username"=>$user,))); 
-               // echo "Только залогинился"; 
+                print_r(json_encode(array("info"=>$info,"username"=>$user,)));  
             }
             else {
                 $errors = array(Kohana::message('auth/user', 'no_user'));
-               // $info="errors";
+                $info="errors";
                 print_r(json_encode(array("info"=>$info,"errors"=>$errors)));
-               // echo "Где то ошибки";
+               
             }
         }
     
     }
     public function action_register() {
-        /*$json = file_get_contents('php://input');
-        $data=json_decode($json,true);*/ 
-        $data=array(
+        $json = file_get_contents('php://input');
+        $data=json_decode($json,true);
+       /* $data=array(
             "email"=>"dkiselo11v113.ua@gmail.com//",
-            "username"=>"dimka11115",
+            "username"=>"dimа_15",
             "password"=>"12345",
             "password_confirm"=>"12345",
             "first_name"=>"DMYTRO",
             "last_name"=>"KYSELOV",
             "country" =>"UKRAINE",
             "city" => "DNIPRO",
-            "company"=>"DVd",
+            "company"=>"DVD",
             "phone_number"=>"+380501305970",
-        );
-        
-        if (isset($data) && count($data)>0 ){
-           //print_r($data);
-            //$data = Arr::extract($_POST, array('username', 'password', 'first_name', 'password_confirm', 'email'));
+        );*/
+        if (isset($data) && count($data)>=10 ){
+            $data = Arr::map('trim', $data);
             $users = ORM::factory('user');
             try {
                 $users->create_user($data, array(
@@ -68,14 +64,11 @@ class Controller_Index_Auth extends Controller_Index {
                 $users->add('roles', $role);
                 $info="Complete";
                 print_r(json_encode(array("info"=>$info,"message"=>"welcome" )));
-                //$this->action_login();
-                //$this->request->redirect('account');
             }
             catch (ORM_Validation_Exception $e) {
                 $errors = $e->errors('auth');
                 $info="error";
-                print_r(json_encode(array("info"=>$info,"message"=>$errors)));
-               // print_r($errors);   
+                print_r(json_encode(array("info"=>$info,"message"=>$errors)));  
             }
         }
         else{ 
@@ -85,10 +78,8 @@ class Controller_Index_Auth extends Controller_Index {
     }
     
     public function action_logout() {
-       // echo "logout";
         if(Auth::instance()->logout()) {
             $this->action_login();
-           // $this->request->redirect();
         }
     }
 }

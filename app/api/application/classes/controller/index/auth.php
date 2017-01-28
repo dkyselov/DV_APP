@@ -33,11 +33,11 @@ class Controller_Index_Auth extends Controller_Index {
     public function action_register() {
         $json = file_get_contents('php://input');
         $data=json_decode($json,true);
-       /* $data=array(
-            "email"=>"dkiselo11v113.ua@gmail.com//",
-            "username"=>"dimа_15",
-            "password"=>"12345",
-            "password_confirm"=>"12345",
+        /*$data=array(
+            "email"=>"dkiselov11.ua@gmail.com",
+            "username"=>"dimka11",
+            "password"=>"12345678?",
+            "password_confirm"=>"12345678",
             "first_name"=>"DMYTRO",
             "last_name"=>"KYSELOV",
             "country" =>"UKRAINE",
@@ -47,6 +47,18 @@ class Controller_Index_Auth extends Controller_Index {
         );*/
         if (isset($data) && count($data)>=10 ){
             $data = Arr::map('trim', $data);
+            //Check of uniqueness of the user
+            $user_uniq = ORM::factory('user')
+            ->where('username', '=', $data['username'])
+            ->or_where('email', '=', $data['email'])
+            ->limit(10)
+            ->find();
+        if($user_uniq->loaded()){
+          $info="found_error";
+          $message=array("message"=>"The user with such login or email already exists");
+          print_r(json_encode(array("info"=>$info,"message"=>$message)));
+        }
+        else{
             $users = ORM::factory('user');
             try {
                 $users->create_user($data, array(
@@ -62,7 +74,7 @@ class Controller_Index_Auth extends Controller_Index {
                 ));
                 $role = ORM::factory('role')->where('name', '=', 'login')->find();
                 $users->add('roles', $role);
-                $info="Complete";
+                $info="ok";
                 print_r(json_encode(array("info"=>$info,"message"=>"welcome" )));
             }
             catch (ORM_Validation_Exception $e) {
@@ -70,10 +82,12 @@ class Controller_Index_Auth extends Controller_Index {
                 $info="error";
                 print_r(json_encode(array("info"=>$info,"message"=>$errors)));  
             }
+         }
         }
         else{ 
-            $info="not_data";
-             print_r(json_encode(array("info"=>$info,"message"=>"Enter all data")));
+            $info="empty_error";
+            $message=array("message"=>"Enter all data");
+            print_r(json_encode(array("info"=>$info,"message"=>$message)));
         }
     }
     

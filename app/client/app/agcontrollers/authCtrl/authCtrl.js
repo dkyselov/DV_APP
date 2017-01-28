@@ -11,14 +11,12 @@ module.exports = function(ngModule) {
 		).then(function mySucces(response) {
 			if(response.status==200){
 				$scope.info = response.data['info'];
-				console.log(response.status);
 				if($scope.info=='login'){
 					$scope.username=response.data['username'];
 					$scope.user=true;
 					$scope.form_controll=false;
 				}
 				if($scope.info=='errors'){
-					console.log("NOlogin");
 					$scope.form_controll=true;
 					$scope.user=false;
 				}
@@ -36,9 +34,7 @@ module.exports = function(ngModule) {
 		$scope.logout= function (){
 			$http.post("http://dv-app/app/api/logout/").success(function (data) {
 				$scope.info = data['info'];
-				//alert($scope.info);
 				if($scope.info=='errors'){
-					//console.log("NOlogin");
 					$scope.form_controll=true;
 					$scope.user=false;
 					//$("#user_info").fadeOut(1000);
@@ -50,14 +46,14 @@ module.exports = function(ngModule) {
 			});
 		}
 		//Send data to server
-        $scope.send_data = function () {
+        $scope.login_to_site = function () {
         let login = $scope.login;
         let password=$scope.password; 
 		let check=$scope.check;
         let request = {"username":login,"password":password,"remember":check};
 		if(request.username=="" || request.username==undefined || request.password=="" || request.password==undefined){
 			//alert("Введите данные");
-			$scope.err="Данные пустые.Все поля должны быть заполнены";
+			$scope.err="Data empty. All fields have to be filled";
 			$scope.show_errors=true;
 		}
 		else{

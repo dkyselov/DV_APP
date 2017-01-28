@@ -10,14 +10,19 @@
 </head>
 <body ng-controller="authCtrl">
 <hr>
-<div class="container" style="width: 400px;">
+<div class="container">
 	<!-- Errors-->
-  <div ng-if="show_errors"  ng-init="myVar = true">
-  <div class="alert alert-danger">
-   <!--  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>-->
-    <strong>Errors!</strong><br>
-    <p>-{{err}}</p>
-	</div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="login"></label>
+    <div class="col-sm-10">
+      <div ng-if="show_errors"  ng-init="myVar = true">
+        <div class="alert alert-danger">
+          <!--  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>-->
+          <strong>Errors!</strong><br>
+          <p>-{{err}}</p>
+      </div>
+    </div>
+    </div>
   </div>
   <!-- username-->
   <div class="alert alert-success alert-dismissable"  id="user_info" style="display:blok;" ng-if="user">
@@ -51,7 +56,7 @@
     </div>
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-default btn-primary" ng-click="send_data()">Send data</button>&nbsp;
+        <button type="submit" class="btn btn-default btn-primary" ng-click="login_to_site()">Login</button>&nbsp;
         <a href="registration.html">Registration</a>
       </div>
     </div>
@@ -60,26 +65,3 @@
 <hr>	
 </body>
 </html>
-<!--<script type="text/javascript">
-    var ngModule=angular.module('app',[]);
-  	ngModule.controller('myCtrl', ['$scope', '$http', function($scope, $http) {
-        $scope.show_errors=false;
-        $scope.send_data = function () {
-        var login = $scope.login;
-        var password=$scope.password; 
-        var request = {"login":login,"password":password};
-	    	$http.post("http://dv-app/app/api/user/", request).success(function (response) {
-		  	//document.write(response);
-		  	if(response!==""){
-          $scope.data="Есть ответ";
-          console.log($scope.data);
-			  }
-			  else{
-			  	$scope.errors="Ошибка сервера";
-          $scope.show_errors=true;
-			  }
-		});          
-		
-	};
-    }]);
-</script>-->

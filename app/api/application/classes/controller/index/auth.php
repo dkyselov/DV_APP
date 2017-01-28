@@ -35,8 +35,8 @@ class Controller_Index_Auth extends Controller_Index {
         $data=json_decode($json,true);
         /*$data=array(
             "email"=>"dkiselov11.ua@gmail.com",
-            "username"=>"dimka11",
-            "password"=>"12345678?",
+            "username"=>"<script>dimka11",
+            "password"=>" $ 12345678>",
             "password_confirm"=>"12345678",
             "first_name"=>"DMYTRO",
             "last_name"=>"KYSELOV",
@@ -47,6 +47,9 @@ class Controller_Index_Auth extends Controller_Index {
         );*/
         if (isset($data) && count($data)>=10 ){
             $data = Arr::map('trim', $data);
+            $data = Arr::map('strip_tags', $data);
+            $data = Arr::map('htmlspecialchars', $data);
+            echo "<br>";
             //Check of uniqueness of the user
             $user_uniq = ORM::factory('user')
             ->where('username', '=', $data['username'])

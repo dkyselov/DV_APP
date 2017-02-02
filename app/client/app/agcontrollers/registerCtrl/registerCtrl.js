@@ -65,6 +65,7 @@ module.exports = function(ngModule) {
         };
 		$http.post("http://dv-app/app/api/register/",request).success(function (data) {
 				$scope.info=data['info'];
+				console.log($scope.info);
 				if($scope.info == "ok"){
 					//content
 					$scope.complate=true;
@@ -72,7 +73,8 @@ module.exports = function(ngModule) {
 					$scope.form_controll=false;	
 					$scope.user=false;
 				}
-				if($scope.info == "error"){
+				
+				 if($scope.info == "error"){
 					$scope.data=data.message._external;
 					//Content
 					$scope.complate=false;
@@ -80,7 +82,7 @@ module.exports = function(ngModule) {
 					$scope.form_controll=true;	
 					$scope.user=false;
 				}
-				if($scope.info == "empty_error"){
+				 if ($scope.info == "empty_error"){
 					$scope.data=data.message;
 					//Content
 					$scope.complate=false;
@@ -88,14 +90,14 @@ module.exports = function(ngModule) {
 					$scope.form_controll=true;	
 					$scope.user=false;
 				}
-				if($scope.info == "found_error"){
+				 if ($scope.info == "found_error"){
 					$scope.data=data.message;
 					//Content
 					$scope.complate=false;
 					$scope.show_errors=true;
 					$scope.form_controll=true;	
 					$scope.user=false;
-				}						
+				} 					
 		});          
 		
 	};

@@ -4,7 +4,7 @@
  */
 class Controller_Index_Auth extends Controller_Index {
     public function action_login() {
-         $info="errors";
+         //$info="errors";
          $auth=Auth::instance();
          if($auth->logged_in()) {
            $user=$auth->get_user()->username;

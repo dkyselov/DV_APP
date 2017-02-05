@@ -24,7 +24,7 @@ public static function get_password_validation($values)
 		//password	
 		    ->rule('password', 'not_empty')
 			->rule('password', 'alpha_numeric', array(':value', TRUE))
-			->rule('password', 'regex', array(':value', '/^[a-zA-Z0-9]+$/'))
+			->rule('password', 'regex', array(':value', '/^[a-z0-9]+$/'))
 	   //password_confirm
 	   		->rule('password', 'not_empty')
 			->rule('password', 'alpha_numeric', array(':value', TRUE))

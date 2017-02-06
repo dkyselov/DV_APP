@@ -14,7 +14,7 @@ module.exports = function(ngModule) {
                     return "Minlenght incorrectly";
                 }
                 if(error.maxlength){
-                    return "Maxlenght incorrectly!";
+                    return "Maxlenght incorrectly";
                 }
                 //console.log(error); 
             }

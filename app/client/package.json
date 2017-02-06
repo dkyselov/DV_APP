@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node node_modules/.bin/webpack-dev-server --content-base app",
-     "build": "NODE_ENV=production webpack --progress",
+    "build": "NODE_ENV=production webpack --progress",
     "watch": "webpack --watch"
   },
   "repository": {
@@ -18,13 +18,14 @@
   "bugs": {
     "url": "https://github.com/dkyselov/DV/issues"
   },
-  
   "homepage": "https://github.com/dkyselov/DV#readme",
   "dependencies": {
+    "angular-crypto": "0.0.3",
+    "angular-md5": "^0.1.10",
     "webpack-uglify-js-plugin": "^1.1.9"
   },
   "devDependencies": {
-     "angular": "^1.6.1",
+    "angular": "^1.6.1",
     "angular-animate": "^1.6.1",
     "angular-cookies": "^1.6.1",
     "angular-route": "^1.6.1",

@@ -1,5 +1,8 @@
 module.exports = function(ngModule) {
-    ngModule.controller('authtestCtrl', ['$scope', function($scope) {
+    ngModule.controller('authtestCtrl', ['$scope','md5', function($scope,md5) {
+      /* $scope.data5 = "Hello";
+       var data6= md5.createHash($scope.data5 || '');
+       console.log(data6);*/
         $scope.usernamePattern=new RegExp("^[a-z0-9_\s]+$");
         $scope.passwordPattern=new RegExp("^[a-z0-9\s]+$");
         $scope.getError=function(error){
@@ -20,7 +23,11 @@ module.exports = function(ngModule) {
             }
         }
         $scope.login_fn=function(auth){
-            console.log(auth);      
+            
+            $scope.auth_send={};
+            $scope.auth_send.username=md5.createHash(auth.username || '');
+            $scope.auth_send.password=md5.createHash(auth.password || '');
+            console.log($scope.auth_send);      
         }
         
      }]);

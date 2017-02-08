@@ -14,7 +14,10 @@ class Controller_Index_Auth extends Controller_Index {
         else { 
            $json = file_get_contents('php://input'); 
            $data=json_decode($json,true);
-           $status = Auth::instance()->login($data['username'], $data['password'], (bool) $data['remember']);
+           $data1['username']=base64_decode($data['username']);
+           $data1['password']=base64_decode($data['password']);
+           $data1['remember']=$data['remember'];
+           $status = Auth::instance()->login($data1['username'], $data1['password'], (bool) $data1['remember']);
            if ($status){
                 $auth=Auth::instance();
                 $user=$auth->get_user()->username;

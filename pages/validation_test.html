@@ -44,7 +44,8 @@
         }
     </style>
 </head>
-<body ng-controller="authtestCtrl">
+<body>
+<div ng-controller="authtestCtrl">
 <!-- Loading window -->
 <div id="win3" ng-if="loading" >
   <div class="cssload-container">
@@ -79,7 +80,7 @@
     <button type="submit" class="btn btn-default btn-primary" ng-click="logout()">Logout</button>
   </center> 
 </div>
- <!-- Form control -->
+ <!-- Form control auth -->
   <form class="form-horizontal" name="auth_form"  ng-submit="login_fn(auth)" ng-if="form_controll" novalidate>
     <div class="form-group">
        <div class="help row" ng-show="auth_form.username.$pristine || auth_form.username.$invalid">
@@ -130,6 +131,7 @@
     </div>
   </form>
   <!-- Form End -->
+</div>
 </div>
 </body>
 </html>
